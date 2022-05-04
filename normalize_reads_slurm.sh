@@ -16,7 +16,7 @@ if [ -n "$SLURM_SUBMIT_DIR" ]; then cd $SLURM_SUBMIT_DIR; fi
 pwd
 
 #job.conf is a file that is a list of r1.fastq files
-r1_path=$(sed "${arrayid}q;d" job.conf)
+r1_path=$(sed -n "$SLURM_ARRAY_TASK_ID"p job.conf)
 
 in_r1=$r1_path
 in_r2=$(echo $r1_path | sed "s/R1/R2/")
